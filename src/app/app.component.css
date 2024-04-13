@@ -123,3 +123,27 @@ input[type=number]::-webkit-outer-spin-button {
 .reasonName {
     font-weight: bold;
 }
+
+@media only screen and (max-width: 1200px) {
+    .container {
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .container {
+        width: 90%;
+    }
+
+    .midcontainer {
+        flex-direction: column;
+    }
+
+    .midinnercontainer {
+        flex-direction: column;
+    }
+
+    .btn {
+        padding: 10px 20px;
+    }
+}
