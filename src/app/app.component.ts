@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   }
   addExpense() {
     if (this.expenseName.length && this.expenseName != null &&
-      this.amount != null && this.amount != undefined
+      this.amount != null && this.amount != undefined && this.amount < 100000
     )
       if (this.amount > 0) {
         {
@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
           this.balance = this.balance - this.amount;
           this.isError = false;
           this.expenseName = '';
-          this.amount = 0;
+          this.amount = null;
         }
       }
       else {
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
   }
   addIncome() {
     if (this.expenseName.length && this.expenseName != undefined &&
-      this.amount != null && this.amount != undefined
+      this.amount != null && this.amount != undefined && this.amount < 100000
     )
       if (this.amount > 0) {
         {
@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
           this.balance = this.balance + this.amount;
           this.isError = false;
           this.expenseName = '';
-          this.amount = 0;
+          this.amount = null;
         }
       }
       else {
