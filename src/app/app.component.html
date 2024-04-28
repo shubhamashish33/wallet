@@ -5,7 +5,7 @@
   <div class="midcontainer">
     <input type="text" name="" id="" placeholder="Reason?" [(ngModel)]="expenseName">
     <div class="midinnercontainer">
-      <input type="number" name="" id="" placeholder="Enter balance" [(ngModel)]="amount" max="100000">
+      <input type="number" name="" id="" placeholder="Enter Amount" [(ngModel)]="amount" max="100000">
       <div class="buttons">
         <button (click)="addExpense()" class="expense btn">Expense</button>
         <button (click)="addIncome()" class="income btn">Income</button>
@@ -21,12 +21,14 @@
     <div *ngIf="isError" class="error-message">
       {{errorMessage}}
     </div>
-    <h4 style="font-style: italic; border-bottom: 2px solid black; margin-bottom: 20px;">Transactions</h4>
+    <h4
+      style="font-style: bold; width: 70%; margin: auto; text-align: center; border-bottom: 1px solid black; margin-bottom: 20px;">
+      Transactions</h4>
     <div class="expenselist" *ngFor="let expense of expenseList"
       [ngStyle]="{ 'border-left': expense.amount > 0 ? '12px solid green' : '12px solid red' }">
       <span class="reasonName">{{expense.expenseName | titlecase}}</span>
       <span>{{expense.amount | currency: "INR"}}</span>
     </div>
   </div>
-  <button (click)="clearLocalStorage()" class="clearAll btn">Clear All</button>
+  <button (click)="clearLocalStorage()" class="clearAll btn" style="cursor: pointer;">Clear All</button>
 </div>
