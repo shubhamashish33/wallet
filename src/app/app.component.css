@@ -1,44 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
 * {
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    font-family: "Open Sans", sans-serif;
     font-optical-sizing: auto;
-    --text: #050318;
-    --background: #f2f7d6;
-    --primary: #2c1be6;
-    --secondary: #cb0600;
-    --accent: #016500;
+    --text: #091208;
+    --background: #f8fcf8;
+    --primary: #53b34d;
+    --secondary: #b14848;
+    --accent: #7783c5;
     color: var(--text);
 }
 
 .container {
     display: grid;
-    width: 60%;
-    margin: auto;
     padding: 40px;
     border-radius: 20px;
+    width: 90%;
+    margin: auto;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+    padding: 40px;
+    gap: 40px;
 }
 
 .topcontainer {
     margin: 50px 0px;
     text-align: center;
-    font-size: 48px;
-    font-weight: 400px;
 }
 
 .midcontainer {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    height: 100px;
 }
 
 .midcontainer input {
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid #ddd;
     font-size: 18px;
     flex: 1;
     font-weight: 400;
@@ -46,9 +49,10 @@
 }
 
 .midinnercontainer {
-    display: flex;
+    display: flex !important;
     justify-content: space-evenly;
     gap: 20px;
+    align-content: center !important;
 }
 
 .midinnercontainer input {
@@ -110,21 +114,45 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .expenselistcontainer {
-    padding: 20px;
+    flex: 1;
+    padding: 20px 10px;
     border-radius: 20px;
-    border: 1px solid var(--text);
-    margin-top: 20px;
+    border: 1px solid #ddd;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+.expenselisttransactions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.mat-mdc-radio-button~.mat-mdc-radio-button {
+    margin-left: 16px;
+    background-color: greenyellow;
+}
+
+.mat-radio-group {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.expensecontent {
+    display: flex;
+    flex-direction: column;
+}
+
 .expenselist {
-    padding: 20px;
+    padding: 10px;
     display: flex;
     border: 1.5px solid var(--text);
     justify-content: space-between;
     border-radius: 10px;
+    flex-grow: 1;
 }
 
 .reasonName {
@@ -139,11 +167,22 @@ input[type=number]::-webkit-outer-spin-button {
 
 @media only screen and (max-width: 800px) {
     .container {
-        width: 90%;
+        width: 100%;
+        padding: 15px;
+    }
+
+    .topcontainer h1 {
+        font-size: 28px !important;
+    }
+
+    .content {
+        flex-direction: column;
+        padding: 0px;
     }
 
     .midcontainer {
         flex-direction: column;
+        height: auto;
     }
 
     .midinnercontainer {

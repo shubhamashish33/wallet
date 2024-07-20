@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    --text: #091208;
+    --background: #f8fcf8;
+    --primary: #53b34d;
+    --secondary: #b14848;
+    --accent: #7783c5;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background-color: var(--background);
+}

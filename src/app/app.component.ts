@@ -11,57 +11,75 @@ export class AppComponent implements OnInit {
   public balance: number = 0;
   public expenseList: any[] = [];
   public expenseName: string = '';
-  public amount: number;
+  public expenseAmount: number;
+  public income_or_expense: any;
   ngOnInit(): void {
     const storedBalance = localStorage.getItem('balance');
     if (storedBalance) {
       this.balance = parseFloat(storedBalance);
     }
     const storedExpenseList = localStorage.getItem('expenseList');
-    if (storedExpenseList) {
+    if (storedExpenseList && storedExpenseList.length > 0) {
       this.expenseList = JSON.parse(storedExpenseList);
     }
   }
+  addTransaction(incomeOrExpense: string) {
+    if (incomeOrExpense) {
+      (incomeOrExpense == "expense") ? this.addExpense() : this.addIncome();
+    }
+    else {
+      const message = "Please Select any option";
+      this.showError(message);
+  }
+}
+  showError(message: string){
+    this.errorMessage = message;
+      this.isError = true;
+      setTimeout(() => {
+        this.errorMessage = "";
+        this.isError = false;
+      }, 2000)
+  }
   addExpense() {
     if (this.expenseName.length && this.expenseName != null &&
-      this.amount != null && this.amount != undefined && this.amount < 100000
+      this.expenseAmount != null && this.expenseAmount != undefined && this.expenseAmount < 100000
     )
-      if (this.amount > 0) {
+      if (this.expenseAmount > 0) {
         {
           this.expenseList.push({
             expenseName: this.expenseName,
-            amount: -this.amount
+            amount: -this.expenseAmount
           });
-          this.balance = this.balance - this.amount;
+          this.balance = this.balance - this.expenseAmount;
           this.isError = false;
           this.expenseName = '';
-          this.amount = null;
+          this.expenseAmount = null;
         }
       }
       else {
-        this.errorMessage = "Negative amount has been passed";
-        this.isError = true;
+        const message: string = "Negative amount has been passed";
+        this.showError(message);
       }
     else {
-      this.errorMessage = "Incorrect parameter has been passed";
-      this.isError = true;
+      const message: string = "Incorrect parameter has been passed";
+      this.showError(message);
     }
     this.saveExpenseList();
   }
   addIncome() {
     if (this.expenseName.length && this.expenseName != undefined &&
-      this.amount != null && this.amount != undefined && this.amount < 100000
+      this.expenseAmount != null && this.expenseAmount != undefined && this.expenseAmount < 100000
     )
-      if (this.amount > 0) {
+      if (this.expenseAmount > 0) {
         {
           this.expenseList.push({
             expenseName: this.expenseName,
-            amount: +this.amount
+            amount: +this.expenseAmount
           });
-          this.balance = this.balance + this.amount;
+          this.balance = this.balance + this.expenseAmount;
           this.isError = false;
           this.expenseName = '';
-          this.amount = null;
+          this.expenseAmount = null;
         }
       }
       else {
@@ -73,6 +91,13 @@ export class AppComponent implements OnInit {
       this.isError = true;
     }
     this.saveExpenseList();
+  }
+  onRemoveExpense(indx: any) {
+    if (indx >= 0 && indx < this.expenseList.length) {
+      this.balance -= this.expenseList[indx].amount;
+      this.expenseList.splice(indx, 1);
+      this.saveExpenseList();
+    }
   }
   saveExpenseList() {
     localStorage.setItem('balance', this.balance.toString());
