@@ -57,6 +57,7 @@
 
 .midinnercontainer input {
     padding: 10px;
+    width: 200px;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -183,6 +184,9 @@ input[type=number]::-webkit-outer-spin-button {
     .midcontainer {
         flex-direction: column;
         height: auto;
+    }
+    .midinnercontainer input {
+        width: 100% !important;
     }
 
     .midinnercontainer {

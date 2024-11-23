@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrencyFormatterDirective } from './currency-input.directive';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,7 +13,9 @@ export class AppComponent implements OnInit {
   public expenseList: any[] = [];
   public expenseName: string = '';
   public expenseAmount: number;
-  public income_or_expense: any;
+  public income_or_expense: string = 'income';
+
+  constructor (private currencyFormatterDirective: CurrencyFormatterDirective){}
   ngOnInit(): void {
     const storedBalance = localStorage.getItem('balance');
     if (storedBalance) {
@@ -23,12 +26,13 @@ export class AppComponent implements OnInit {
       this.expenseList = JSON.parse(storedExpenseList);
     }
   }
-  addTransaction(incomeOrExpense: string) {
+  addTransaction(incomeOrExpense: string, expenseAmount: any) {
+    this.expenseAmount = this.currencyFormatterDirective.convertToNumber(expenseAmount);
     if (incomeOrExpense) {
       (incomeOrExpense == "expense") ? this.addExpense() : this.addIncome();
     }
     else {
-      const message = "Please Select any option";
+      const message = "Please select any option";
       this.showError(message);
   }
 }

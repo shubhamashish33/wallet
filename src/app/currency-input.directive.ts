@@ -1,32 +1,26 @@
-import { Directive, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Directive, HostListener, ElementRef } from '@angular/core';
 @Directive({
-  selector: '[appCurrencyInput]'
+  selector: '[currencyFormatter]'
 })
-export class CurrencyInputDirective {
-  private el: HTMLInputElement;
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
-    this.el = this.elementRef.nativeElement;
-    this.el.type = 'text';
-  }
-  @HostListener('input', ['$event']) onInputChange(event: Event): void {
-    const value = this.el.value.replace(/,/g, '');
-    const formattedValue = this.formatCurrency(value);
-    this.renderer.setProperty(this.el, 'value', formattedValue);
-  }
-  @HostListener('blur', ['$event']) onBlur(event: Event): void {
-    const value = this.el.value.replace(/,/g, '');
-    this.renderer.setProperty(this.el, 'value', value);
-    this.renderer.setAttribute(this.el, 'type', 'number');
-  }
-  @HostListener('focus', ['$event']) onFocus(event: Event): void {
-    this.renderer.setAttribute(this.el, 'type', 'text');
-    const value = this.el.value.replace(/,/g, '');
-    this.renderer.setProperty(this.el, 'value', this.formatCurrency(value));
+export class CurrencyFormatterDirective {
+  constructor(private el: ElementRef) {}
+  @HostListener('input', ['$event'])
+  onInput(event: any): void {
+    let inputValue = this.el.nativeElement.value;
+    inputValue = inputValue.replace(/[^\d.-]/g, '');
+    const formattedValue = this.formatCurrency(inputValue);
+    this.el.nativeElement.value = formattedValue;
   }
   private formatCurrency(value: string): string {
-    if (!value) return '';
+    if (!value) {
+      return '';
+    }
     let [integer, decimal] = value.split('.');
     integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return decimal ? `${integer}.${decimal}` : integer;
+  }
+  public convertToNumber(value: string): number {
+    const cleanedValue = value.replace(/[^0-9.-]+/g, '');
+    return parseFloat(cleanedValue);
   }
 }

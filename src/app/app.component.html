@@ -4,14 +4,14 @@
   </div>
   <div class="content">
     <div class="midcontainer">
-      <input type="text" placeholder="Reason?" [(ngModel)]="expenseName">
+      <input type="text" placeholder="Enter Expense" [(ngModel)]="expenseName">
       <div class="midinnercontainer">
-        <input type="number" placeholder="Enter Amount" [(ngModel)]="expenseAmount" max="100000" id="currency">
+        <input type="text" #currencyInput placeholder="Enter Amount" [(ngModel)]="expenseAmount" max="100000" id="currency" min="0" currencyFormatter>
         <mat-radio-group [(ngModel)]="income_or_expense" aria-label="Select an option">
           <mat-radio-button value="expense">Expense</mat-radio-button>
           <mat-radio-button value="income">Income</mat-radio-button>
         </mat-radio-group>
-        <button mat-flat-button style="background-color: #7783c5; color: #f8fcf8;" (click)="addTransaction(income_or_expense)">Add
+        <button mat-flat-button style="background-color: #7783c5; color: #f8fcf8;" (click)="addTransaction(income_or_expense, currencyInput.value)">Add
           Transactions</button>
       </div>
       <div class="totalamt" *ngIf="expenseList && expenseList.length > 0">
@@ -19,11 +19,11 @@
           Balance: {{balance |currency:'INR'}}
         </h3>
       </div>
-    </div>
-    <div class="expenselistcontainer" *ngIf="expenseList && expenseList.length > 0">
       <div *ngIf="isError" class="error-message">
         {{errorMessage}}
       </div>
+    </div>
+    <div class="expenselistcontainer" *ngIf="expenseList && expenseList.length > 0">
       <h4
         style="font-style: bold; width: 100%; margin: auto; text-align: center; border-bottom: 1px solid black; margin-bottom: 20px;">
         Transactions</h4>
