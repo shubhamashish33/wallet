@@ -14,9 +14,10 @@
 .container {
     display: grid;
     padding: 40px;
-    border-radius: 20px;
     width: 90%;
     margin: auto;
+    place-items: center;
+    height: 100vh;
 }
 
 .content {
@@ -115,6 +116,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .expenselistcontainer {
+    width: 100%;
     flex: 1;
     padding: 20px 10px;
     border-radius: 20px;
@@ -195,5 +197,9 @@ input[type=number]::-webkit-outer-spin-button {
 
     .btn {
         padding: 10px 20px;
+    }
+    .contentHolder{
+        margin: 0px;
+        width: 100%;
     }
 }

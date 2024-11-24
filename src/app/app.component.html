@@ -1,49 +1,51 @@
 <div class="container">
-  <div class="topcontainer">
-    <h1 style="font-size: 3rem; font-weight: bolder;">Track your Wallet 💵</h1>
-  </div>
-  <div class="content">
-    <div class="midcontainer">
-      <input type="text" placeholder="Enter Expense" [(ngModel)]="expenseName">
-      <div class="midinnercontainer">
-        <input type="text" #currencyInput placeholder="Enter Amount" [(ngModel)]="expenseAmount" max="100000" id="currency" min="0" currencyFormatter>
-        <mat-radio-group [(ngModel)]="income_or_expense" aria-label="Select an option">
-          <mat-radio-button value="expense">Expense</mat-radio-button>
-          <mat-radio-button value="income">Income</mat-radio-button>
-        </mat-radio-group>
-        <button mat-flat-button style="background-color: #7783c5; color: #f8fcf8;" (click)="addTransaction(income_or_expense, currencyInput.value)">Add
-          Transactions</button>
-      </div>
-      <div class="totalamt" *ngIf="expenseList && expenseList.length > 0">
-        <h3>
-          Balance: {{balance |currency:'INR'}}
-        </h3>
-      </div>
-      <div *ngIf="isError" class="error-message">
-        {{errorMessage}}
-      </div>
+  <div class="contentHolder">
+    <div class="topcontainer">
+      <h1 style="font-size: 3rem; font-weight: bolder;">Track your Wallet 💵</h1>
     </div>
-    <div class="expenselistcontainer" *ngIf="expenseList && expenseList.length > 0">
-      <h4
-        style="font-style: bold; width: 100%; margin: auto; text-align: center; border-bottom: 1px solid black; margin-bottom: 20px;">
-        Transactions</h4>
-      <div class="expenselisttransactions">
-        <div class="expenselist" *ngFor="let expense of expenseList; let indx = index"
-          [ngStyle]="{ 'border-top': expense.amount > 0 ? '12px solid #53b34d' : '12px solid #b14848' }">
-          <div class="expensecontent">
-            <span class="reasonName">{{expense.expenseName | titlecase}}</span>
-            <span>{{expense.amount | currency: "INR"}}</span>
-          </div>
-          <div class="deleteicon" style="cursor: pointer;" (click)="onRemoveExpense(indx)">
-            <svg xmlns="http://www.w3.org/2000/svg" height="20" width="15"
-              viewBox="0 0 384 512">
-              <path
-                d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
-            </svg>
-          </div>
+    <div class="content">
+      <div class="midcontainer">
+        <input type="text" placeholder="Enter Expense" [(ngModel)]="expenseName">
+        <div class="midinnercontainer">
+          <input type="text" #currencyInput placeholder="Enter Amount" [(ngModel)]="expenseAmount" max="100000" id="currency" min="0" currencyFormatter>
+          <mat-radio-group [(ngModel)]="income_or_expense" aria-label="Select an option">
+            <mat-radio-button color = "primary" value="expense">Expense</mat-radio-button>
+            <mat-radio-button color = "primary" value="income">Income</mat-radio-button>
+          </mat-radio-group>
+          <button mat-raised-button style="background-color: #7783c5; color: #f8fcf8;" (click)="addTransaction(income_or_expense, currencyInput.value)">Add
+            Transactions</button>
+        </div>
+        <div class="totalamt" *ngIf="expenseList && expenseList.length > 0">
+          <h3>
+            Balance: {{balance |currency:'INR'}}
+          </h3>
+        </div>
+        <div *ngIf="isError" class="error-message">
+          {{errorMessage}}
         </div>
       </div>
-      <button (click)="clearLocalStorage()" class="clearAll btn" style="cursor: pointer;">Clear All</button>
+      <div class="expenselistcontainer" *ngIf="expenseList && expenseList.length > 0">
+        <h4
+          style="font-style: bold; width: 100%; margin: auto; text-align: center; border-bottom: 1px solid black; margin-bottom: 20px;">
+          Transactions</h4>
+        <div class="expenselisttransactions">
+          <div class="expenselist" *ngFor="let expense of expenseList; let indx = index"
+            [ngStyle]="{ 'border-top': expense.amount > 0 ? '12px solid #53b34d' : '12px solid #b14848' }">
+            <div class="expensecontent">
+              <span class="reasonName">{{expense.expenseName | titlecase}}</span>
+              <span>{{expense.amount | currency: "INR"}}</span>
+            </div>
+            <div class="deleteicon" style="cursor: pointer;" (click)="onRemoveExpense(indx)">
+              <svg xmlns="http://www.w3.org/2000/svg" height="20" width="15"
+                viewBox="0 0 384 512">
+                <path
+                  d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <button (click)="clearLocalStorage()" class="clearAll btn" style="cursor: pointer;">Clear All</button>
+      </div>
     </div>
   </div>
 </div>
