@@ -5,7 +5,7 @@
     </div>
     <div class="content">
       <div class="midcontainer">
-        <input type="text" placeholder="Enter Expense" [(ngModel)]="expenseName">
+        <input type="text" placeholder="Expense Details" [(ngModel)]="expenseName">
         <div class="midinnercontainer">
           <input type="text" #currencyInput placeholder="Enter Amount" [(ngModel)]="expenseAmount" max="100000" id="currency" min="0" currencyFormatter>
           <mat-radio-group [(ngModel)]="income_or_expense" aria-label="Select an option">
